@@ -1,9 +1,4 @@
-/node_modules/
-
-
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
+.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
 *.code-workspace
@@ -21,6 +16,3 @@ node_modules/
 /playwright/.cache/
 /example.spec.js
 test-examples/
-
-
-

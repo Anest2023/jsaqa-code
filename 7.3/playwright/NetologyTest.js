@@ -14,3 +14,6 @@ const { chromium } = require("playwright");
   //assertion
   await browser.close();
 })();
+
+
+//запускаем: node NetologyTest.js

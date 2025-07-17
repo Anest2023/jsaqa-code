@@ -1,22 +1,60 @@
-const { test, expect } = require("@playwright/test");
 
-test("test", async ({ page }) => {
-  // Go to https://netology.ru/free/management#/
-  await page.goto("https://netology.ru/free/management#/");
 
-  // Click a
-  await page.click("a");
-  await expect(page).toHaveURL("https://netology.ru/");
+const { test, expect } = require ('@playwright/test');
+const {chromium } = require ('playwright');
+const {email, password} = require ("/Users/guseyanka/Desktop/jsaqa-code/7.3/playwright/tests/user.js");
 
-  // Click text=Учиться бесплатно
-  await page.click("text=Учиться бесплатно");
-  await expect(page).toHaveURL("https://netology.ru/free");
 
-  page.click("text=Бизнес и управление");
-
-  // Click text=Как перенести своё дело в онлайн
-  await page.click("text=Как перенести своё дело в онлайн");
-  await expect(page).toHaveURL(
-    "https://netology.ru/programs/kak-perenesti-svoyo-delo-v-onlajn-bp"
-  );
+test('valid password test', async ()=> {
+  
+const browser = await chromium.launch({
 });
+const page = await browser.newPage();
+
+await page.goto('https://netology.ru');
+await page.click ("text = Войти");
+
+  
+await page.getByRole('textbox', { name: 'Email' }).fill('efremenko_ira@mail.ru');
+await page.getByRole('textbox', { name: 'Пароль' }).fill('Varthoff0810');
+
+await page.getByTestId('login-submit-btn').click();
+
+
+await expect(page).toHaveURL("https://netology.ru/profile/8884381");
+
+});
+
+
+test('invalid password test', async ()=> {
+
+    const browser = await chromium.launch({
+ });
+
+ const page = await browser.newPage();
+
+
+
+  await page.goto('https://netology.ru/');
+  await page.getByRole('link', { name: 'Войти' }).click();
+
+  await page.getByRole('textbox', { name: 'Email' }).click();
+  await page.getByRole('textbox', { name: 'Email' }).fill('efremenko_ira@mail.ru');
+
+  await page.getByRole('textbox', { name: 'Пароль' }).click();
+  await page.getByRole('textbox', { name: 'Пароль' }).fill('Varthoff');
+
+  await page.getByTestId('login-submit-btn').click();
+
+  await expect(page.locator('[data-testid = login-error-hint]')).toContainText(
+
+    "Вы ввели неправильно логин или пароль."
+    
+  );
+
+})
+
+    
+  
+
+  
