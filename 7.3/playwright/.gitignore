@@ -22,5 +22,6 @@ node_modules/
 /example.spec.js
 test-examples/
 example.spec.js
+tests-examples/
 
 
